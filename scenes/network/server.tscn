@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://0ugxobbmfusk"]
+
+[ext_resource type="Script" uid="uid://d3no0dnf0ry0g" path="res://source/network/Server.cs" id="1_k0wwj"]
+[ext_resource type="Script" uid="uid://4kyvs3tkqpol" path="res://source/world/World.cs" id="2_d1cp1"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_d1cp1"]
+ground_color = Color(0.527374, 0.643062, 1, 1)
+
+[sub_resource type="Sky" id="Sky_f73tg"]
+sky_material = SubResource("PhysicalSkyMaterial_d1cp1")
+
+[sub_resource type="Environment" id="Environment_m85bm"]
+background_mode = 2
+sky = SubResource("Sky_f73tg")
+
+[node name="Server" type="Node" node_paths=PackedStringArray("_world")]
+script = ExtResource("1_k0wwj")
+_world = NodePath("World")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://drqe33chulg7")
+spawn_path = NodePath("..")
+
+[node name="World" type="Node" parent="."]
+script = ExtResource("2_d1cp1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_m85bm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.899023, -0.317894, 0.301165, 0, 0.687747, 0.725951, -0.4379, -0.652647, 0.6183, 0, 0, 0)
